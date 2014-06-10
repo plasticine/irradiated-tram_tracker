@@ -1,6 +1,6 @@
 module Irradiated
-  module Views
-    class TramTracker < View
+  module TramTracker
+    class View < Irradiated::Views::View
       def test_value
         Irradiated.adapter.get(storage_key)
       end
@@ -8,7 +8,7 @@ module Irradiated
       private
 
       def worker
-        Irradiated::Workers::TramTracker
+        Irradiated::TramTracker::Worker
       end
 
       def to_builder

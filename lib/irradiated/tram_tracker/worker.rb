@@ -1,6 +1,6 @@
 module Irradiated
-  module Workers
-    class TramTracker < Worker
+  module TramTracker
+    class Worker < Irradiated::Workers::Worker
       REFRESH_INTERVAL = 1.minute
 
       attr_reader :route_id, :stop_id
@@ -13,7 +13,8 @@ module Irradiated
       end
 
       def work
-        save([storage_key, route_id, stop_id].to_json)
+        schedule = Service.current_schedule(route_id, stop_id)
+        save(schedule.to_json)
       end
     end
   end
