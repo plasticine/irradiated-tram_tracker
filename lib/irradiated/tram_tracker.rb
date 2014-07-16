@@ -1,3 +1,4 @@
+require 'sprockets-coffee-react'
 require 'irradiated/tram_tracker/version'
 require 'irradiated/tram_tracker/view'
 require 'irradiated/tram_tracker/worker'

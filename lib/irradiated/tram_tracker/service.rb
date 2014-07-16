@@ -1,3 +1,6 @@
+require 'handsoap'
+require 'curb'
+
 module Irradiated
   module TramTracker
     class Service < Handsoap::Service
@@ -10,17 +13,22 @@ module Irradiated
       endpoint TRAM_TRACKER_ENDPOINT
 
       def current_schedule(route_id, stop_no, low_floor = false)
-        response = invoke('GetNextPredictedRoutesCollection', soap_action: nil) do |message|
-          message.set_attr 'xmlns', 'http://www.yarratrams.com.au/pidsservice/'
-          message.add 'stopNo',   stop_no
-          message.add 'routeNo',  route_id
-          message.add 'lowFloor', low_floor
+        response = call_get_next_predicted_routes_collection(route_id, stop_no, low_floor)
+        response.document.xpath('//ToReturn').map do |node|
+          parse_schedule_node(node)
         end
-        nodes = response.document.xpath('//ToReturn')
-        nodes.map {|node| parse_schedule_node(node) }
       end
 
       private
+
+      def call_get_next_predicted_routes_collection(route_id, stop_no, low_floor)
+        invoke('GetNextPredictedRoutesCollection', soap_action: nil) do |message|
+          message.set_attr 'xmlns',    'http://www.yarratrams.com.au/pidsservice/'
+          message.add      'stopNo',   stop_no
+          message.add      'routeNo',  route_id
+          message.add      'lowFloor', low_floor
+        end
+      end
 
       def ns
         { ns: 'http://www.yarratrams.com.au/pidsservice/' }

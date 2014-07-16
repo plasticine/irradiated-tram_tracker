@@ -18,9 +18,10 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "handsoap"
-  spec.add_runtime_dependency "curb"
-  spec.add_runtime_dependency "nokogiri"
+  spec.add_dependency "handsoap"
+  spec.add_dependency "curb"
+  spec.add_dependency "nokogiri"
+  spec.add_dependency "sprockets-coffee-react"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"

@@ -1,24 +1,16 @@
 module Irradiated
   module TramTracker
     class View < Irradiated::Views::View
-      def test_value
-        Irradiated.adapter.get(storage_key)
+      attr_reader :route_id, :stop_id
+
+      def key
+        super(route_id, stop_id)
       end
 
       private
 
       def worker
         Irradiated::TramTracker::Worker
-      end
-
-      def to_builder
-        Jbuilder.new do |tram|
-          person.(self, :name, :age)
-        end
-      end
-
-      def storage_key
-        super(@route_id, @stop_id)
       end
 
       def parse_options(options)

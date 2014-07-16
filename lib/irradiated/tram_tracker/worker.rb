@@ -13,8 +13,7 @@ module Irradiated
       end
 
       def work
-        schedule = Service.current_schedule(route_id, stop_id)
-        save(schedule.to_json)
+        Service.current_schedule(route_id, stop_id)
       end
     end
   end

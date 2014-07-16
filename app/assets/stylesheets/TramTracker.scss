@@ -1,0 +1,16 @@
+.TramTracker {
+
+}
+
+.TramTracker__badge {
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  background-image: image-url('TramTracker__icon.svg');
+  background-size: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
